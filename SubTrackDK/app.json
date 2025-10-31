@@ -31,18 +31,9 @@
       "favicon": "./assets/favicon.png"
     },
     "extra": {
-      "expoClientId": "179613259041-u01jfmivmmb5aglrs7b90hhgf60o0ppu.apps.googleusercontent.com",
-      "iosClientId": "179613259041-u01jfmivmmb5aglrs7b90hhgf60o0ppu.apps.googleusercontent.com",
-      "androidClientId": "179613259041-u01jfmivmmb5aglrs7b90hhgf60o0ppu.apps.googleusercontent.com",
-      "facebookAppId": "DIN_FACEBOOK_APP_ID",            
-      "linkedinClientId": "DIN_LINKEDIN_CLIENT_ID",        
       "eas": {
         "projectId": "98d7b878-b1d1-4d6c-9ad1-370a345f90a7"
       }
-    },
-    "plugins": [
-      "expo-auth-session",
-      "expo-linking"                                       
-    ]
+    }
   }
 }
