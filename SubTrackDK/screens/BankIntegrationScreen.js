@@ -113,12 +113,12 @@ const BankIntegrationScreen = ({ navigation }) => {
       console.log(`🎯 OpenAI detected ${response.data.subscriptions?.length || 0} subscriptions from PDF`);
 
       if (response.data.subscriptions && response.data.subscriptions.length > 0) {
-        // Save detected subscriptions to Supabase
+        // Save detected subscriptions to database
         let savedCount = 0;
         for (const sub of response.data.subscriptions) {
-          const logoUrl = getDomainFromCompanyName(sub.name) ? 
+          const logoUrl = getDomainFromCompanyName(sub.name) ?
             `https://logo.clearbit.com/${getDomainFromCompanyName(sub.name)}` : null;
-          
+
           const subscriptionData = {
             title: sub.name,
             amount: sub.amount,
@@ -127,7 +127,7 @@ const BankIntegrationScreen = ({ navigation }) => {
             currency: 'DKK',
             logo_url: logoUrl
           };
-          
+
           // Only add transaction_date if it exists and is not null
           if (sub.transaction_date) {
             subscriptionData.transaction_date = sub.transaction_date;

@@ -16,7 +16,7 @@ import re
 import datetime as dt
 
 from models import UserCreate, UserInDB, Token, TokenData, SubscriptionCreate, SubscriptionInDB, get_password_hash, verify_password
-from supabase_client import get_user_by_email, create_user, create_subscription, get_subscriptions_by_owner, delete_subscription
+from database import get_user_by_email, create_user, create_subscription, get_subscriptions_by_owner, delete_subscription, init_db
 
 load_dotenv()
 
@@ -709,7 +709,8 @@ Vigtige regler:
 
 @app.on_event("startup")
 async def create_db_tables():
-    print("Ensure 'users' and 'subscriptions' tables exist in Supabase.")
+    print("Initializing SQLite database...")
+    init_db()
 
 # ---------- Helper utilities ----------
 

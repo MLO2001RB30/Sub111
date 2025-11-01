@@ -165,11 +165,11 @@ const SubscriptionsListScreen = ({ navigation }) => {
   };
 
   const filteredAndSortedSubscriptions = React.useMemo(() => {
-    console.log('🔍 SubscriptionsList: Supabase subscriptions count:', subscriptions.length);
+    console.log('🔍 SubscriptionsList: Database subscriptions count:', subscriptions.length);
     console.log('🔍 SubscriptionsList: Sample subscription:', subscriptions[0]);
-    
-    // Use only Supabase subscriptions (proper database storage)
-    console.log('✅ Using only Supabase subscriptions:', subscriptions.length);
+
+    // Use only database subscriptions (proper database storage)
+    console.log('✅ Using only database subscriptions:', subscriptions.length);
     
     let filtered = subscriptions;
     
@@ -187,15 +187,15 @@ const SubscriptionsListScreen = ({ navigation }) => {
   const fetchSubscriptions = async () => {
     try {
       setLoading(true);
-      const supabaseSubs = await getSubscriptions();
-      
-      console.log('📊 Fetched from Supabase:', supabaseSubs?.length || 0, 'subscriptions');
-      
-      // Use Supabase subscriptions directly (includes imported Tink data)
-      setSubscriptions(supabaseSubs || []);
+      const dbSubs = await getSubscriptions();
+
+      console.log('📊 Fetched from database:', dbSubs?.length || 0, 'subscriptions');
+
+      // Use database subscriptions directly (includes imported Tink data)
+      setSubscriptions(dbSubs || []);
       setError(null);
     } catch (err) {
-      console.error('Failed to fetch subscriptions from Supabase:', err);
+      console.error('Failed to fetch subscriptions from database:', err);
       setError('Kunne ikke hente abonnementer. Tjek om du er logget ind.');
       Alert.alert(
         'Fejl',
@@ -208,8 +208,8 @@ const SubscriptionsListScreen = ({ navigation }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      console.log('🎯 SubscriptionsListScreen focused - fetching from Supabase...');
-      fetchSubscriptions(); // Fetch directly from Supabase database
+      console.log('🎯 SubscriptionsListScreen focused - fetching from database...');
+      fetchSubscriptions(); // Fetch directly from database
     }, [])
   );
 

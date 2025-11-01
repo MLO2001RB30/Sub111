@@ -492,12 +492,12 @@ const ImportSubscriptionsScreen = ({ route, navigation }) => {
         console.log('ℹ️ OpenAI found no subscriptions in your transactions');
       }
       
-      // Save detected subscriptions directly to Supabase
+      // Save detected subscriptions directly to database
       for (const sub of detectedSubs) {
         const logoUrl = sub.domain ? `https://logo.clearbit.com/${sub.domain}` : null;
-        
+
         console.log(`🏷️ Saving "${sub.name}" → Category: "${sub.category}"`);
-        
+
         const subscriptionData = {
           title: sub.name,        // Backend expects 'title' not 'name'
           amount: sub.price,      // Backend expects 'amount' not 'price'
@@ -506,17 +506,17 @@ const ImportSubscriptionsScreen = ({ route, navigation }) => {
           currency: 'DKK',        // Backend expects currency
           logo_url: logoUrl       // Clearbit logo URL
         };
-        
+
         // Only add transaction_date if it exists and is not null
         if (sub.transactionDate) {
           subscriptionData.transaction_date = sub.transactionDate;
         }
 
         try {
-          // Save directly to Supabase database
+          // Save directly to database
           console.log('📤 Sending subscription data:', subscriptionData);
           const response = await createSubscription(subscriptionData);
-          console.log('✅ Saved subscription to Supabase:', sub.name, response);
+          console.log('✅ Saved subscription to database:', sub.name, response);
         } catch (error) {
           console.error('❌ Failed to save subscription:', sub.name);
           console.error('❌ Error details:', error.response?.data || error.message);
